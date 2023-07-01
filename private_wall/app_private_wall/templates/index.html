@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register and Login</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <div class="container text-center">
+    <div class="row ">
+        <div class="col">
+          <h1 class="m-4 text-center">Register</h1>
+          <form id="register-form" action="/register" method="POST">
+            <div class="bg-warning text-dark">
+                {% with messages_register = get_flashed_messages(with_categories='error_register') %}     <!-- declare a variable called messages -->
+                  {% if messages_register %}  
+                                             <!-- check if there are any messages -->
+                      
+                        {% for category, message in messages_register %}
+                          {% if category == 'error_register'  %}
+                            <p> {{ message }}</p>
+                          {% endif %}
+                        {% endfor %}
+                    
+                  {% endif %}
+                {% endwith %}
+              </div>
+              <div class="row">
+                <div class="col-8 mb-3">
+                    <input type="text" class="form-control" placeholder="First Name" aria-label="First Name" name="first_name">
+                </div>
+                <div class="col-8 mb-3">
+                    <input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" name="last_name">
+                </div>
+                <div class="col-8 mb-3">
+                    <input type="text" class="form-control" placeholder="Email" aria-label="Email" name="email">
+                </div>
+                <div class="col-8 mb-3">
+                  <input type="password" class="form-control" placeholder="Password" id="password" aria-label="password" name="password">
+                </div>
+                <div class="col-8 mb-3">
+                  <input type="password" class="form-control" placeholder="Confirm Password" id="confirmpassword" aria-label="confirmpassword" name="confirmpassword">
+                </div>
+                  <div class="col-8 mb-3">
+                    <label for="fech_nac">Fecha Nacimiento</label>
+                    <input type="date" class="form-control" aria-label="birthdate" name="fech_nac">
+                  </div>
+
+                <div class="col-8 m-3">
+                  <table>
+                    <tr>
+                      <th> Pais Nacimiento</th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input class="form-check-input" type="radio" name="country_nac" id="country_nac1" value="Colombia">
+                        <label class="form-check-label" for="country_nac1">Colombia</label>
+                      </td>
+                      <td>
+                        <input class="form-check-input" type="radio" name="country_nac" id="country_nac2" value="Chile">
+                        <label class="form-check-label" for="country_nac2">Chile</label>
+                      </td>
+                    </tr>
+                  </table>
+                </div> 
+                <div class="col-8 m-3">
+                  <table>
+                    <tr>
+                      <th> Lenguaje Favorito</th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input class="form-check-input" type="checkbox" value="Python" name="language" id="flexCheckDefault">Python                  
+                      </td>
+                      <td>
+                        <input class="form-check-input" type="checkbox" value="SQL" name="language" id="flexCheckChecked">SQL
+                      </td>
+                    </tr>
+                  </table>
+                </div> 
+                
+
+                <div class="col-8 mb-3">
+                    <button type="submit" class="btn btn-outline-success" >Crear</button>
+                </div>
+              </div>
+          </form>
+          
+        </div>
+
+        <div class="col">
+            <h1 class="m-4 text-center">Login</h1>
+            
+              <form id="login-form" action="/login" method="post">
+                <div class="bg-danger text-light">
+                  {% with messages_login = get_flashed_messages(with_categories='error_login' ) %}     <!-- declare a variable called messages -->
+                    {% if messages_login  %}                            <!-- check if there are any messages -->
+                      
+                        {% for category, message in messages_login %}
+                          {% if category == 'error_login'  %}
+                            <p> {{ message }}</p>
+                          {% endif %}
+                        {% endfor %}
+                      
+                   
+                    {% endif %}
+                  {% endwith %}
+                </div>
+                <div class="col-8 mb-3">
+                    <input type="text" class="form-control" placeholder="Email" aria-label="Email" name="email">
+                </div>
+                <div class="col-8 mb-3">
+                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" name="password">
+                </div>
+                <div class="col-8 mb-3">
+                    <button type="submit" class="btn btn-outline-success" >Iniciar Sesión</button>
+                </div>
+              </form>
+           
+        </div>
+    </div>
+    
+  </div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
